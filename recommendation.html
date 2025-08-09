@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AK Collection - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Nunito:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div class="surprise-hero-bg">
+  <div class="floating-shape shape1"></div>
+  <div class="floating-shape shape2"></div>
+  <div class="floating-shape shape3"></div>
+  <div class="floating-shape shape4"></div>
+</div>
+<header>
+  <div class="nav-container">
+    <a href="home.html" class="logo">AK Collection</a>
+    <link rel="stylesheet" href="recommendation.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Nunito:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+    <nav>
+      
+      <ul>
+        <li><a href="index.php">home</a></li>
+        <li><a class="nav-link active" href="recommendation.html">Recommend</a></li>
+        <li><a class="nav-link" href="men.php">Men</a></li>
+        <li><a class="nav-link" href="women.php">Women</a></li>
+        <li><a class="nav-link" href="kids.php">Kids</a></li>
+        <li><a class="nav-link" href="sale.php">Sale</a></li>
+        <li><a class="nav-link" href="cart.php">Cart 🛒</a></li>
+        <li><a class="nav-link" href="notification.php">🔔</a></li>
+        <li><a href="logout.php">Logout</a></li>
+        <li>
+          <button id="cartIconBtn" class="cart-icon" aria-label="Cart" title="Cart">
+            🛒<span id="cartCount" class="cart-count" style="display:none;">0</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main>
+  <!-- Hero Section -->
+  <section class="surprise-hero" id="surpriseHero">
+    <h1>Find Your<br>Dream Style</h1>
+    <p>
+      <b>AK Collection</b> matches the perfect outfit to your unique skin tone, body type, and vibe.<br>
+      <span style="color:blue;font-weight:700;">Let’s style you up!</span>
+    </p>
+    <button class="cta-btn" id="getStartedBtn">Start My Style Journey</button>
+  </section>
+  <!-- Card Wizard Steps -->
+  <section class="wizard-card" id="step1">
+    <div class="wizard-title">Step 1: Select Your Skin Tone</div>
+    <div class="options-grid" id="skinToneOptions"></div>
+    <div class="wizard-actions">
+      <button class="nav-btn" id="step1Next" disabled>Next</button>
+    </div>
+  </section>
+  <section class="wizard-card" id="step2">
+    <div class="wizard-title">Step 2: Your Favorite Colors</div>
+    <div class="wizard-desc">Choose colors that make you feel confident!</div>
+    <div class="options-grid" id="colorOptions"></div>
+    <div class="wizard-actions">
+      <button class="nav-btn" id="step2Prev">Back</button>
+      <button class="nav-btn" id="step2Next" disabled>Next</button>
+    </div>
+  </section>
+  <section class="wizard-card" id="step3">
+    <div class="wizard-title">Step 3: Your Body Type</div>
+    <div class="options-grid" id="bodyTypeOptions"></div>
+    <div class="wizard-actions">
+      <button class="nav-btn" id="step3Prev">Back</button>
+      <button class="nav-btn" id="step3Next" disabled>Next</button>
+    </div>
+  </section>
+  <section class="wizard-card" id="step4">
+    <div class="wizard-title">Step 4: Season</div>
+    <div class="options-grid" id="categoryOptions"></div>
+    <div class="wizard-actions">
+      <button class="nav-btn" id="step4Prev">Back</button>
+      <button class="nav-btn" id="step4Next" disabled>See My Looks</button>
+    </div>
+  </section>
+  <section class="recommendations-section" id="recommendationsSection">
+    <div class="recommendations-title" id="recTitle"></div>
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="no-products" id="noProducts" style="display:none;"></div>
+    <button class="try-again-btn" id="tryAgainBtn">Try Again</button>
+    <button class="cta-btn" id="startOverBtn" style="margin-top:2.1rem;">Start Over</button>
+  </section>
+</main>
+<!-- CART MODAL -->
+<div class="cart-modal" id="cartModal">
+  <div class="cart-title" style="font-size:1.4rem;font-weight:900;">🛒 Your Cart</div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-total" id="cartTotal"></div>
+  <div class="cart-empty" id="cartEmpty" style="display:none;">Your cart is empty.</div>
+  <button class="cart-checkout-btn" id="cartCheckoutBtn" style="display:none;">Proceed to Checkout</button>
+  <button class="cart-checkout-btn" style="background:#eee;color:#555;" id="cartCloseBtn">Close</button>
+</div>
+<!-- PAYMENT MODAL -->
+<div class="payment-modal" id="paymentModal">
+  <form id="paymentForm" autocomplete="off">
+    <div style="font-size:1.32rem;font-weight:900;color:#ff3ba7;margin-bottom:.9rem;">Payment</div>
+    <div style="margin-bottom:1rem;">
+      <label><input type="radio" name="paymethod" value="card" checked /> Credit/Debit Card</label>
+      <label style="margin-left:1.4em;"><input type="radio" name="paymethod" value="esewa" /> eSewa</label>
+      <label style="margin-left:1.4em;"><input type="radio" name="paymethod" value="khalti" /> Khalti</label>
+      <label style="margin-left:1.4em;"><input type="radio" name="paymethod" value="imepay" /> IME Pay</label>
+    </div>
+    <!-- Card fields -->
+    <div id="cardFields">
+      <label>
+        Name on Card
+        <input type="text" id="cardName" placeholder="Cardholder Name" required />
+      </label>
+      <label>
+        Card Number
+        <input type="text" maxlength="19" inputmode="numeric" pattern="[0-9 ]*" id="cardNumber" placeholder="1234 5678 9012 3456" required />
+      </label>
+      <label>
+        Expiry
+        <input type="text" maxlength="7" inputmode="numeric" pattern="[0-9/]*" id="expiry" placeholder="MM/YY" required />
+      </label>
+      <label>
+        <br>
+        CVC
+        <input type="text" maxlength="4" inputmode="numeric" pattern="[0-9]*" id="cvc" placeholder="CVC" required />
+      </label>
+    </div>
+    <!-- eSewa fields -->
+    <div id="esewaFields" style="display:none;">
+      <label>
+           eSewa ID (Mobile Number)
+        <input type="text" id="esewaId" maxlength="10" pattern="[0-9]{10}" placeholder="98XXXXXXXX" required />
+      </label>
+      <label>
+        <br>
+            Account Name
+        <input type="text" id="esewaName" placeholder="eSewa Account Name" required />
+      </label>
+    </div>
+    <!-- Khalti fields -->
+    <div id="khaltiFields" style="display:none;">
+      <label>
+           Khalti ID (Mobile Number)
+        <input type="text" id="khaltiId" maxlength="10" pattern="[0-9]{10}" placeholder="98XXXXXXXX" required />
+      </label>
+      <label>
+        <br>
+            Khalti Account Name
+        <input type="text" id="khaltiName" placeholder="Khalti Account Name" required />
+      </label>
+    </div>
+    <!-- IME Pay fields -->
+    <div id="imepayFields" style="display:none;">
+      <label>
+        <br> 
+           IME Pay Number
+        <input type="text" id="imepayId" maxlength="10" pattern="[0-9]{10}" placeholder="98XXXXXXXX" required />
+      </label>
+      <label>
+        <br>
+        IME Pay Account Name
+        <input type="text" id="imepayName" placeholder="IME Pay Account Name" required />
+      </label>
+    </div>
+    <div style="font-weight:700;margin:1.1rem 0 .1rem 0;">
+      Total: <span id="payTotal"></span>
+    </div>
+    <button class="pay-btn" id="payNowBtn" type="submit">Pay Now</button>
+    <button class="pay-btn" style="background:#eee;color:#6C63FF;" id="payCancelBtn" type="button">Cancel</button>
+    <div class="payment-status" id="paymentStatus" style="display:none;"></div>
+  </form>
+</div>
+<script>
+// ---------- Home Page Wizard & Cart Logic ----------
+const skinTones = [
+  { id: 'fair', name: 'Fair', color: '#ffd9ca' },
+  { id: 'medium', name: 'Medium', color: '#dbac65' },
+  { id: 'olive', name: 'Olive', color: '#c9a86f' },
+  { id: 'dark', name: 'Dark', color: '#704225' }
+];
+const colorsBySkinTone = {
+  fair: [
+    {id:'navy', name:'Navy Blue', color:'#1e40af'},
+    {id:'burgundy', name:'Burgundy', color:'#800020'},
+    {id:'emerald', name:'Emerald Green', color:'#047857'},
+    {id:'softpink', name:'Soft Pink', color:'#f9c1cc'},
+    {id:'lightblue', name:'Light Blue', color:'#add8e6'},
+    {id:'lavender', name:'Lavender', color:'#e6e6fa'},
+    {id:'coral', name:'Coral', color:'#f97316'},
+    {id:'peach', name:'Peach', color:'#ffcc99'},
+    {id:'cream', name:'Cream', color:'#fef3c7'}
+  ],
+  medium: [
+    {id:'mustard', name:'Mustard Yellow', color:'#d97706'},
+    {id:'teal', name:'Teal', color:'#0f766e'},
+    {id:'coral', name:'Coral', color:'#f97316'},
+    {id:'periwinkle', name:'Periwinkle', color:'#6366f1'},
+    {id:'peach', name:'Peach', color:'#ffcc99'},
+    {id:'olivegreen', name:'Olive Green', color:'#556b2f'},
+    {id:'maroon', name:'Maroon', color:'#800000'},
+    {id:'olive', name:'Olive', color:'#808000'},
+    {id:'chocolate', name:'Chocolate', color:'#d2691e'}
+  ],
+  olive: [
+    {id:'rust', name:'Rust Orange', color:'#b45309'},
+    {id:'forest', name:'Forest Green', color:'#134e4a'},
+    {id:'plum', name:'Plum', color:'#6b21a8'},
+    {id:'cream', name:'Cream', color:'#fef3c7'},
+    {id:'tan', name:'Tan', color:'#d2b48c'},
+    {id:'gold', name:'Gold', color:'#ffd700'},
+    {id:'bronze', name:'Bronze', color:'#cd7f32'},
+    {id:'mustard', name:'Mustard', color:'#d4ac33'},
+    {id:'sage', name:'Sage', color:'#9caf88'}
+  ],
+  dark: [
+    {id:'gold', name:'Gold', color:'#d4af37'},
+    {id:'royalblue', name:'Royal Blue', color:'#2563eb'},
+    {id:'magenta', name:'Magenta', color:'#db2777'},
+    {id:'cobalt', name:'Cobalt', color:'#2563eb'},
+    {id:'burgundy', name:'Burgundy', color:'#800020'},
+    {id:'charcoal', name:'Charcoal', color:'#36454f'},
+    {id:'emerald', name:'Emerald', color:'#046307'},
+    {id:'navy', name:'Navy', color:'#000080'},
+    {id:'plum', name:'Plum', color:'#580f41'}
+  ]
+};
+const bodyTypes = [
+  { id: 'hourglass', name: 'Hourglass', img: 'hourglass.png' },
+  { id: 'rectangle', name: 'Rectangle', img: 'rectangle.png' },
+  { id: 'pear', name: 'Pear', img: 'pear.png' },
+  { id: 'apple', name: 'Apple', img: 'apple.png' },
+  { id: 'inverted', name: 'Inverted Triangle', img: 'inverted.png' }
+];
+const seasons = [
+  {id: 'summer', name: 'Summer'},
+  {id: 'winter', name: 'Winter'},
+  {id: 'spring', name: 'Spring'},
+  {id: 'autumn', name: 'Autumn'}
+];
+const seasonProducts = {
+  summer: [
+    {id: 1, name: "Summer Tee", price: 12.99, img: "Summer Tee.png"},
+    {id: 2, name: "Beach Shorts", price: 19.99, img: "beach shorts.png"}
+  ],
+  winter: [
+    {id: 3, name: "Cozy Sweater", price: 29.99, img: "cozy sweater.png"},
+    {id: 4, name: "Woolen Coat", price: 69.99, img: "woolen coat.png"}
+  ],
+  spring: [
+    {id: 5, name: "Floral Dress", price: 39.99, img: "floral dress.png"},
+    {id: 6, name: "Light Cardigan", price: 25.99, img: "light cardigan.png"}
+  ],
+  autumn: [
+    {id: 7, name: "Plaid Shirt", price: 24.00, img: "plaid shirt.png"},
+    {id: 8, name: "Brown Boots", price: 49.99, img: "brown boots.png"}
+  ]
+};
+let selections = { skinTone: null, colors: [], bodyType: null, category: null };
+let currentStep = 0;
+let cart = [];
+
+// DOM elements
+const stepEls = [
+  document.getElementById('step1'),
+  document.getElementById('step2'),
+  document.getElementById('step3'),
+  document.getElementById('step4')
+];
+const recSection = document.getElementById('recommendationsSection');
+const recTitle = document.getElementById('recTitle');
+const productsGrid = document.getElementById('productsGrid');
+const noProducts = document.getElementById('noProducts');
+
+// --- WIZARD LOGIC ---
+document.getElementById('getStartedBtn').onclick = () => {
+  document.getElementById('surpriseHero').style.display = "none";
+  showStep(0);
+};
+function renderSkinTones() {
+  const cont = document.getElementById('skinToneOptions');
+  cont.innerHTML = '';
+  skinTones.forEach(tone => {
+    const div = document.createElement('div');
+    div.className = 'option' + (selections.skinTone===tone.id?' selected':'');
+    div.innerHTML = `<span class="skin-swatch" style="background:${tone.color};width:70px;height:70px;margin-bottom:.6rem;border:2.5px solid #fff;"></span>
+      <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.25rem;color:#161616;">${tone.name}</div>`;
+    div.onclick = () => {
+      selections.skinTone = tone.id;
+      renderSkinTones();
+      document.getElementById('step1Next').disabled = !selections.skinTone;
+    };
+    cont.appendChild(div);
+  });
+}
+function renderColors() {
+  const cont = document.getElementById('colorOptions');
+  cont.innerHTML = '';
+  if (!selections.skinTone) {
+    cont.innerHTML = '<div style="color:#888;font-size:1.1rem;">Please select a skin tone first.</div>';
+    return;
+  }
+  colorsBySkinTone[selections.skinTone].forEach(color => {
+    const div = document.createElement('div');
+    div.className = 'option' + (selections.colors.includes(color.id)?' selected':'');
+    div.innerHTML = `<span class="color-swatch" style="background:${color.color}"></span><label>${color.name}</label>`;
+    div.onclick = () => {
+      if (selections.colors.includes(color.id)) {
+        selections.colors = selections.colors.filter(c=>c!==color.id);
+      } else {
+        selections.colors.push(color.id);
+      }
+      renderColors();
+      document.getElementById('step2Next').disabled = !selections.colors.length;
+    };
+    cont.appendChild(div);
+  });
+}
+function renderBodyTypes() {
+  const cont = document.getElementById('bodyTypeOptions');
+  cont.innerHTML = '';
+  bodyTypes.forEach(bt => {
+    const div = document.createElement('div');
+    div.className = 'option' + (selections.bodyType===bt.id?' selected':'');
+    div.innerHTML = `<img src="${bt.img}" alt="${bt.name}" class="body-image"/><label>${bt.name}</label>`;
+    div.onclick = () => {
+      selections.bodyType = bt.id;
+      renderBodyTypes();
+      document.getElementById('step3Next').disabled = !selections.bodyType;
+    };
+    cont.appendChild(div);
+  });
+}
+function renderCategories() {
+  const cont = document.getElementById('categoryOptions');
+  cont.innerHTML = '';
+  seasons.forEach(season => {
+    const div = document.createElement('div');
+    div.className = 'option' + (selections.category===season.id?' selected':'');
+    div.innerHTML = `<label>${season.name}</label>`;
+    div.onclick = () => {
+      selections.category = season.id;
+      renderCategories();
+      document.getElementById('step4Next').disabled = !selections.category;
+    };
+    cont.appendChild(div);
+  });
+}
+function renderRecommendations() {
+  recSection.classList.add('active');
+  recTitle.textContent = selections.category ? `Looks for ${seasons.find(s=>s.id===selections.category).name}` : "";
+  productsGrid.innerHTML = '';
+  noProducts.style.display = 'none';
+  let filtered = (seasonProducts[selections.category]||[]); // Show seasonal products
+  if (!filtered.length) {
+    noProducts.style.display = "";
+    noProducts.textContent = "No products found for your selection. Try different options!";
+  } else {
+    filtered.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `<img src="${product.img}" alt="${product.name}" />
+        <div class="product-name">${product.name}</div>
+        <div class="product-price">$${product.price.toFixed(2)}</div>
+        <button class="add-cart-btn" onclick="addToCartModal('${product.name}',${product.price},'${product.img}')">Add to Cart</button>
+        <button class="buy-btn" onclick="buyNowModal('${product.name}',${product.price},'${product.img}')">Buy</button>
+      `;
+      productsGrid.appendChild(card);
+    });
+  }
+}
+function showStep(idx) {
+  stepEls.forEach((el,i)=>el.classList.toggle('active',i===idx));
+  recSection.classList.remove('active');
+  currentStep = idx;
+  if(idx===0) renderSkinTones();
+  if(idx===1) renderColors();
+  if(idx===2) renderBodyTypes();
+  if(idx===3) renderCategories();
+}
+document.getElementById('step1Next').onclick = ()=> showStep(1);
+document.getElementById('step2Prev').onclick = ()=> showStep(0);
+document.getElementById('step2Next').onclick = ()=> showStep(2);
+document.getElementById('step3Prev').onclick = ()=> showStep(1);
+document.getElementById('step3Next').onclick = ()=> showStep(3);
+document.getElementById('step4Prev').onclick = ()=> showStep(2);
+document.getElementById('step4Next').onclick = ()=> {
+  stepEls.forEach(el=>el.classList.remove('active'));
+  renderRecommendations();
+};
+document.getElementById('tryAgainBtn').onclick = function() {
+  renderRecommendations();
+};
+document.getElementById('startOverBtn').onclick = ()=>{
+  recSection.classList.remove('active');
+  document.getElementById('surpriseHero').style.display = "";
+  selections = { skinTone: null, colors: [], bodyType: null, category: null };
+  stepEls.forEach(el=>el.classList.remove('active'));
+  document.getElementById('step1Next').disabled = true;
+  document.getElementById('step2Next').disabled = true;
+  document.getElementById('step3Next').disabled = true;
+  document.getElementById('step4Next').disabled = true;
+  window.scrollTo({top:0, behavior:"smooth"});
+};
+document.getElementById('step1Next').disabled = true;
+document.getElementById('step2Next').disabled = true;
+document.getElementById('step3Next').disabled = true;
+document.getElementById('step4Next').disabled = true;
+
+// --- CART LOGIC ---
+const cartIconBtn = document.getElementById('cartIconBtn');
+const cartCount = document.getElementById('cartCount');
+const cartModal = document.getElementById('cartModal');
+const cartItems = document.getElementById('cartItems');
+const cartTotal = document.getElementById('cartTotal');
+const cartEmpty = document.getElementById('cartEmpty');
+const cartCheckoutBtn = document.getElementById('cartCheckoutBtn');
+const cartCloseBtn = document.getElementById('cartCloseBtn');
+
+function updateCartCount() {
+  if(cart.length > 0) {
+    cartCount.style.display = "";
+    cartCount.textContent = cart.reduce((a, b) => a + b.qty, 0);
+  } else {
+    cartCount.style.display = "none";
+  }
+}
+function showCart() {
+  renderCart();
+  cartModal.classList.add('active');
+}
+function hideCart() {
+  cartModal.classList.remove('active');
+}
+function addToCartModal(name, price, img) {
+  let idx = cart.findIndex(item => item.name === name);
+  if(idx > -1) {
+    cart[idx].qty += 1;
+  } else {
+    cart.push({ name, price, img, qty: 1 });
+  }
+  updateCartCount();
+  showCart();
+}
+function buyNowModal(name, price, img) {
+  // Direct to checkout with only this item
+  cart = [{ name, price, img, qty: 1 }];
+  updateCartCount();
+  showCart();
+  setTimeout(() => { showPayment(); }, 400);
+}
+function removeFromCart(idx) {
+  cart.splice(idx, 1);
+  updateCartCount();
+  renderCart();
+}
+function renderCart() {
+  cartItems.innerHTML = "";
+  if(cart.length === 0) {
+    cartEmpty.style.display = "";
+    cartCheckoutBtn.style.display = "none";
+    cartTotal.textContent = "";
+  } else {
+    cartEmpty.style.display = "none";
+    cartCheckoutBtn.style.display = "";
+    let total = 0;
+    cart.forEach((item, idx) => {
+      total += item.price * item.qty;
+      cartItems.innerHTML += `
+        <div class="cart-item">
+          <img src="${item.img}" />
+          <div class="cart-item-info">
+            <div style="font-weight:800;">${item.name}</div>
+            <div style="font-size:0.97rem;">$${item.price.toFixed(2)} × ${item.qty}</div>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart(${idx})">×</button>
+        </div>
+      `;
+    });
+    cartTotal.textContent = "Total: $" + total.toFixed(2);
+  }
+}
+window.addToCartModal = addToCartModal;
+window.buyNowModal = buyNowModal;
+window.removeFromCart = removeFromCart;
+cartIconBtn.onclick = showCart;
+cartCloseBtn.onclick = hideCart;
+cartCheckoutBtn.onclick = function() {
+  hideCart();
+  showPayment();
+};
+
+// --- PAYMENT LOGIC ---
+const paymentModal = document.getElementById('paymentModal');
+const paymentForm = document.getElementById('paymentForm');
+const payNowBtn = document.getElementById('payNowBtn');
+const payCancelBtn = document.getElementById('payCancelBtn');
+const payTotal = document.getElementById('payTotal');
+const paymentStatus = document.getElementById('paymentStatus');
+
+// Payment fields
+const cardFields = document.getElementById('cardFields');
+const esewaFields = document.getElementById('esewaFields');
+const khaltiFields = document.getElementById('khaltiFields');
+const imepayFields = document.getElementById('imepayFields');
+
+function showPayment() {
+  payTotal.textContent = "$" + cart.reduce((a,b)=>a+b.price*b.qty,0).toFixed(2);
+  paymentStatus.style.display = "none";
+  paymentForm.reset();
+  // Default to card
+  cardFields.style.display = "";
+  esewaFields.style.display = "none";
+  khaltiFields.style.display = "none";
+  imepayFields.style.display = "none";
+  // Required fields
+  Array.from(cardFields.querySelectorAll('input')).forEach(el => el.required = true);
+  Array.from(esewaFields.querySelectorAll('input')).forEach(el => el.required = false);
+  Array.from(khaltiFields.querySelectorAll('input')).forEach(el => el.required = false);
+  Array.from(imepayFields.querySelectorAll('input')).forEach(el => el.required = false);
+  paymentModal.classList.add('active');
+}
+function hidePayment() {
+  paymentModal.classList.remove('active');
+}
+payCancelBtn.onclick = hidePayment;
+
+// Payment method switcher
+paymentForm.addEventListener('change', function(e) {
+  let val = paymentForm.paymethod.value;
+  cardFields.style.display = val === 'card' ? "" : "none";
+  esewaFields.style.display = val === 'esewa' ? "" : "none";
+  khaltiFields.style.display = val === 'khalti' ? "" : "none";
+  imepayFields.style.display = val === 'imepay' ? "" : "none";
+  // Set required fields
+  Array.from(cardFields.querySelectorAll('input')).forEach(el => el.required = (val==='card'));
+  Array.from(esewaFields.querySelectorAll('input')).forEach(el => el.required = (val==='esewa'));
+  Array.from(khaltiFields.querySelectorAll('input')).forEach(el => el.required = (val==='khalti'));
+  Array.from(imepayFields.querySelectorAll('input')).forEach(el => el.required = (val==='imepay'));
+});
+
+paymentForm.onsubmit = function(e) {
+  e.preventDefault();
+  payNowBtn.disabled = true;
+  paymentStatus.style.display = "none";
+  let method = paymentForm.paymethod.value;
+
+  if (method === "card") {
+    setTimeout(() => {
+      const name = paymentForm.cardName.value.trim();
+      const card = paymentForm.cardNumber.value.replace(/\s+/g,'');
+      const expiry = paymentForm.expiry.value.trim();
+      const cvc = paymentForm.cvc.value.trim();
+      if(name && card.length >= 12 && expiry.match(/^\d{2}\/\d{2,4}$/) && cvc.length >= 3) {
+        paymentStatus.textContent = "Payment Successful! 🎉";
+        paymentStatus.className = "payment-status";
+        paymentStatus.style.display = "";
+        cart = [];
+        updateCartCount();
+        setTimeout(() => { hidePayment(); }, 1200);
+      } else {
+        paymentStatus.textContent = "Payment Failed! Please check your card details.";
+        paymentStatus.className = "payment-status fail";
+        paymentStatus.style.display = "";
+        payNowBtn.disabled = false;
+      }
+    }, 1300);
+  } else if (method === "esewa") {
+    setTimeout(() => {
+      const id = paymentForm.esewaId.value.trim();
+      const name = paymentForm.esewaName.value.trim();
+      if(id.match(/^[9][8-9][0-9]{8}$/) && name.length >= 2) {
+        paymentStatus.textContent = "eSewa Payment Successful! 🎉";
+        paymentStatus.className = "payment-status";
+        paymentStatus.style.display = "";
+        cart = [];
+        updateCartCount();
+        setTimeout(() => { hidePayment(); }, 1200);
+      } else {
+        paymentStatus.textContent = "eSewa Payment Failed! Check ID and name.";
+        paymentStatus.className = "payment-status fail";
+        paymentStatus.style.display = "";
+        payNowBtn.disabled = false;
+      }
+    }, 1300);
+  } else if (method === "khalti") {
+    setTimeout(() => {
+      const id = paymentForm.khaltiId.value.trim();
+      const name = paymentForm.khaltiName.value.trim();
+      if(id.match(/^[9][8-9][0-9]{8}$/) && name.length >= 2) {
+        paymentStatus.textContent = "Khalti Payment Successful! 🎉";
+        paymentStatus.className = "payment-status";
+        paymentStatus.style.display = "";
+        cart = [];
+        updateCartCount();
+        setTimeout(() => { hidePayment(); }, 1200);
+      } else {
+        paymentStatus.textContent = "Khalti Payment Failed! Check ID and name.";
+        paymentStatus.className = "payment-status fail";
+        paymentStatus.style.display = "";
+        payNowBtn.disabled = false;
+      }
+    }, 1300);
+  } else if (method === "imepay") {
+    setTimeout(() => {
+      const id = paymentForm.imepayId.value.trim();
+      const name = paymentForm.imepayName.value.trim();
+      if(id.match(/^[9][8-9][0-9]{8}$/) && name.length >= 2) {
+        paymentStatus.textContent = "IME Pay Payment Successful! 🎉";
+        paymentStatus.className = "payment-status";
+        paymentStatus.style.display = "";
+        cart = [];
+        updateCartCount();
+        setTimeout(() => { hidePayment(); }, 1200);
+      } else {
+        paymentStatus.textContent = "IME Pay Payment Failed! Check number and name.";
+        paymentStatus.className = "payment-status fail";
+        paymentStatus.style.display = "";
+        payNowBtn.disabled = false;
+      }
+    }, 1300);
+  }
+};
+
+// Initialize cart count on page load
+updateCartCount();
+</script>
+</body>
+</html>

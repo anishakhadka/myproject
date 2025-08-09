@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    /* Reset default margin/padding */
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
+    nav#nav {
+      background: #333;
+      padding: 10px 0;
+    }
+
+    nav#nav .navbar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    nav#nav .navbar ul li {
+      display: inline;
+    }
+
+    nav#nav .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      display: inline-block;
+    }
+
+    nav#nav .navbar ul li a.active,
+    nav#nav .navbar ul li a:hover {
+      background-color: #555;
+      border-radius: 4px;
+    }
+
+    /* Center form container */
+    .login-container {
+      height: calc(100vh - 50px); /* full viewport height minus navbar */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f5f5;
+    }
+
+    form {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    form input[type="email"],
+    form input[type="password"] {
+      padding: 12px 15px;
+      font-size: 16px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    form input[type="email"]:focus,
+    form input[type="password"]:focus {
+      border-color: #4CAF50;
+      box-shadow: 0 0 5px #4CAF50;
+    }
+
+    form button {
+      padding: 14px;
+      font-size: 18px;
+      background-color: #4CAF50; /* green */
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      align-self: center;
+      width: 100%;
+      max-width: 150px;
+    }
+
+    form button:hover {
+      background-color: #FFC0CB; /* light pink */
+      transform: scale(1.05);
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <div class="navbar">
+      <ul>
+        <li><a href="index.php">home</a></li>
+        <li><a class="nav-link active" href="recommendation.html">Recommend</a></li>
+        <li><a class="nav-link" href="men.php">Men</a></li>
+        <li><a class="nav-link" href="women.php">Women</a></li>
+        <li><a class="nav-link active" href="kids.php">Kids</a></li>
+        <li><a class="nav-link" href="sale.php">Sale</a></li>
+        <li><a class="nav-link" href="notification.php">notification</a></li>
+        <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="signup.html">Signup</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="login-container">
+    <form action="login.php" method="POST">
+      <input type="email" name="email" placeholder="Enter email" required>
+      <input type="password" name="password" placeholder="Enter password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+</body>
+</html>
